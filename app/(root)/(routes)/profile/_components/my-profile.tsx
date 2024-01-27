@@ -30,10 +30,14 @@ const MyProfile = () => {
   };
 
   const logout = async () => {
+    await axios.get(`${api}/auth/logout`, {
+      withCredentials: true,
+    });
     clearStorage();
     router.push("/auth");
     toast.success("로그아웃되었습니다");
   };
+
   useEffect(() => {
     const getUserProfile = async () => {
       const data = await axios
@@ -96,9 +100,7 @@ const MyProfile = () => {
             좋아요
           </TabsTrigger>
         </TabsList>
-        <TabsContent value="my-stuff">
-          {/* <MyStuffList /> */}
-        </TabsContent>
+        <TabsContent value="my-stuff">{/* <MyStuffList /> */}</TabsContent>
         <TabsContent value="transaction">거래중인 물건이 없어요</TabsContent>
         <TabsContent value="heart">좋아요 누른 물건</TabsContent>
       </Tabs>

@@ -38,6 +38,7 @@ const LoginForm = () => {
         auth.login();
         auth.setName(data.user.name);
         toast.success(data.message);
+        router.push("/auth/login");
       } else {
         toast.error(data.message);
       }
@@ -47,7 +48,6 @@ const LoginForm = () => {
     } finally {
       resetFormData();
       setLoading(false);
-      window.location.reload();
     }
   };
 
