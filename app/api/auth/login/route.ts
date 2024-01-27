@@ -19,10 +19,10 @@ export async function POST(request: NextRequest) {
     }
     const comparePassword = await bcrypt.compare(password, user.password!);
     if (!comparePassword) {
-      return {
+      return NextResponse.json({
         success: false,
         message: "아이디 또는 비밀번호가 일치하지 않습니다",
-      };
+      });
     }
 
     const payload = {
@@ -39,11 +39,19 @@ export async function POST(request: NextRequest) {
       user,
     });
 
-    response.cookies.set("token", token);
+    response.cookies.set("token", token, {
+      httpOnly: true,
+    });
+
+    console.log(response);
 
     return response;
   } catch (error: any) {
     console.log(error);
-    return NextResponse.json({ success: false, error: error.message });
+    return NextResponse.json({
+      success: false,
+      message: "로그인 실패",
+      user: null,
+    });
   }
 }
