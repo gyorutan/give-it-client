@@ -41,7 +41,7 @@ const LoginForm = () => {
         auth.login();
         auth.setName(data.user.name);
         toast.success(data.message);
-        router.push("/auth");
+        router.push("/");
       } else {
         toast.error(data.message);
       }
