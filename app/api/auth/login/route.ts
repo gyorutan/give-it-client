@@ -45,8 +45,6 @@ export async function POST(request: NextRequest) {
       sameSite: "none",
     });
 
-    console.log(response);
-
     return response;
   } catch (error: any) {
     console.log(error);

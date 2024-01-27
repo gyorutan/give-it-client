@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { api } from "@/helper/api";
 import useAuth from "@/store/useAuth";
 import axios from "axios";
 import { Loader2 } from "lucide-react";
@@ -31,7 +32,9 @@ const LoginForm = () => {
     try {
       setLoading(true);
       const data = await axios
-        .post("/api/auth/login", formData)
+        .post(`${api}/auth/login`, formData, {
+          withCredentials: true,
+        })
         .then((res) => res.data);
       console.log(data);
       if (data.success) {
