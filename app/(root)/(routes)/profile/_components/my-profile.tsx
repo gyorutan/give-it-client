@@ -23,7 +23,6 @@ interface User {
 const MyProfile = () => {
   const [user, setUser] = useState<User | null>(null);
   const router = useRouter();
-  const auth = useAuth();
 
   const clearStorage = () => {
     useAuth.persist.clearStorage();
