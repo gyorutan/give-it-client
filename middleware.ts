@@ -13,13 +13,18 @@ export function middleware(request: NextRequest) {
     pathname === "/auth/signup";
   console.log(isLoggedIn);
 
-  if (isLoggedIn && AUTH_PATH) {
-    return NextResponse.redirect(new URL("/", request.nextUrl));
+  if (AUTH_PATH) {
+    if (isLoggedIn) {
+      return NextResponse.redirect(new URL("/", request.nextUrl));
+    }
+    return null;
   }
 
   if (!isLoggedIn && !AUTH_PATH) {
     return NextResponse.redirect(new URL("/auth", request.nextUrl));
   }
+
+  return null;
 }
 
 // See "Matching Paths" below to learn more
